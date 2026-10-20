@@ -11,7 +11,7 @@ from lxml import etree as ET, html
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from catalogue import ROOT, NS, LANG, q, read, records, record_view, schema, parser, entry_tree
-from build import build, render, repository_url
+from build import WORDS, build, render, repository_url
 from export_csv import listed_rows, export
 from list_summary import render_summary
 
@@ -64,6 +64,23 @@ class SiteTests(unittest.TestCase):
                     url=node.get('href') or node.get('src')
                     if url.startswith(('./','../')):
                         self.assertTrue((page.parent/url).is_file(),url)
+
+    def test_search_controls_and_modal_text_are_available_in_both_languages(self):
+        for lang, label in [('ja','名称・説明・機関名から検索'),('en','Search names, descriptions and institutes')]:
+            with self.subTest(lang=lang):
+                doc=html.fromstring(render(self.root,lang,REPOSITORY))
+                self.assertFalse(doc.xpath('//*[@data-language-switch]'))
+                field=doc.get_element_by_id('directory-query')
+                self.assertEqual(field.get('type'),'search')
+                self.assertEqual(doc.xpath('//label[@for="directory-query"]/text()'),[label])
+                self.assertEqual(field.get('aria-describedby'),'search-help')
+                self.assertEqual(doc.get_element_by_id('search-status').get('role'),'status')
+                for rec in records(self.root,True):
+                    view=record_view(rec,lang)
+                    detail=doc.get_element_by_id('detail-'+view['id'])
+                    description=detail.xpath('.//div[@class="dialog-overview"]/p')[0]
+                    self.assertEqual(''.join(description.text_content().splitlines()),
+                                     ''.join((view['description'] or WORDS[lang]['no_description']).splitlines()))
 
     def test_hierarchy_uses_either_standard_relation_direction(self):
         expected=render(self.root,'ja',REPOSITORY)

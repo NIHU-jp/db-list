@@ -3,15 +3,70 @@
   const dialog = document.querySelector('#resource-dialog');
   const body = document.querySelector('#dialog-body');
   const institutionDetails = [...document.querySelectorAll('.institution-details')];
+  const searchInput = document.querySelector('#directory-query');
   const desktop = window.matchMedia('(min-width: 959px)');
   function adaptDetails() {
-    institutionDetails.forEach(details => { details.open = desktop.matches; });
+    institutionDetails.forEach(details => { details.open = desktop.matches || Boolean(searchInput.value.trim()); });
   }
   institutionDetails.forEach(details => details.querySelector('summary').addEventListener('click', event => {
     if (desktop.matches) event.preventDefault();
   }));
   desktop.addEventListener('change', adaptDetails);
   adaptDetails();
+  const searchBox = document.querySelector('.directory-search');
+  const clearSearch = document.querySelector('#clear-search');
+  const searchStatus = document.querySelector('#search-status');
+  const searchEmpty = document.querySelector('#search-empty');
+  const sections = [...document.querySelectorAll('[data-section]')];
+  const normalize = text => text.normalize('NFKC').toLowerCase().replace(/\s+/gu, ' ').trim();
+  const entries = [...document.querySelectorAll('[data-entry]')].map(item => {
+    const detail = document.getElementById(`detail-${item.dataset.entry}`).content;
+    const text = [...detail.querySelectorAll('.dialog-institution, #dialog-title, .dialog-alternate, .dialog-overview p, .dialog-tags')]
+      .map(node => node.textContent).join(' ');
+    return {item, id: item.dataset.entry, text: normalize(text + ' ' + (item.querySelector(':scope > .list-summary')?.textContent || ''))};
+  });
+  const total = new Set(entries.map(entry => entry.id)).size;
+  const disclosures = [...document.querySelectorAll('.institution-details, .collection-list')];
+  let savedDisclosures = null;
+  function filterEntries() {
+    const terms = normalize(searchInput.value).split(' ').filter(Boolean);
+    const active = terms.length > 0;
+    if (active && !savedDisclosures) savedDisclosures = new Map(disclosures.map(details => [details, details.open]));
+    const matches = new Set();
+    entries.forEach(({item, id, text}) => {
+      const matchesQuery = terms.every(term => text.includes(term));
+      item.hidden = !matchesQuery;
+      if (matchesQuery) matches.add(id);
+    });
+    // Retain ancestor names as context, without counting them as matches.
+    entries.forEach(({item}) => {
+      if (item.hidden) return;
+      for (let parent = item.parentElement.closest('[data-entry]'); parent; parent = parent.parentElement.closest('[data-entry]')) parent.hidden = false;
+    });
+    sections.forEach(section => { section.hidden = !section.querySelector('[data-entry]:not([hidden])'); });
+    if (active) disclosures.forEach(details => {
+      const visible = Boolean(details.querySelector('[data-entry]:not([hidden])'));
+      details.open = visible;
+      if (details.classList.contains('collection-list')) details.hidden = !visible;
+    });
+    else {
+      savedDisclosures?.forEach((wasOpen, details) => { details.open = details.classList.contains('institution-details') ? desktop.matches || wasOpen : wasOpen; });
+      savedDisclosures = null;
+      disclosures.forEach(details => { details.hidden = false; });
+    }
+    clearSearch.disabled = !searchInput.value;
+    searchEmpty.hidden = matches.size > 0;
+    searchStatus.textContent = searchStatus.dataset.countTemplate.replace('{visible}', matches.size).replace('{total}', total);
+  }
+  searchInput.addEventListener('input', event => { if (!event.isComposing) filterEntries(); });
+  searchInput.addEventListener('compositionend', filterEntries);
+  clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    filterEntries();
+    searchInput.focus();
+  });
+  searchBox.hidden = false;
+  filterEntries();
   let lastTrigger = null;
   let previousHash = '';
   let currentId = '';
@@ -73,10 +128,5 @@
       window.prompt(document.documentElement.lang === 'ja' ? 'リンクをコピー' : 'Copy link', url.href);
     }
   });
-  document.querySelectorAll('[data-language-switch]').forEach(anchor => anchor.addEventListener('click', () => {
-    const url = new URL(anchor.getAttribute('href'), location.href);
-    if (location.hash.startsWith('#db-')) url.hash = location.hash;
-    anchor.href = url.href;
-  }));
   fromHash();
 })();

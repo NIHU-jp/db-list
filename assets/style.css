@@ -26,10 +26,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .breadcrumb li + li::before { content: ">"; color: #333; margin: 0 1em; }
 .breadcrumb [aria-current] { color: var(--brand); }
 .breadcrumb a:hover { text-decoration: underline; }
-.language-switch { flex-shrink: 0; color: #555; font-size: 13px; }
 .directory-shell { width: 90%; max-width: 1280px; margin: 0 auto; padding-bottom: 50px; }
 .page-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 50px; }
 .page-heading h1 { margin: 0; font-size: 32px; line-height: 1.4; font-weight: 600; }
+.directory-search { margin: -22px 0 30px; max-width: 720px; }
+.directory-search label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+.search-controls { display: flex; gap: 10px; }
+.search-controls input { min-width: 0; flex: 1; width: 100%; border: 1px solid #aaa; border-radius: 5px; padding: 10px 12px; background: white; }
+.search-controls button { flex-shrink: 0; padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; background: #f6f6f6; font-size: 13px; }
+.search-controls button:disabled { color: #888; cursor: default; }
+#search-help { margin: 8px 0; color: #666; font-size: 12px; }
+#search-status { margin: 8px 0 0; font-size: 13px; }
+#search-empty { padding: 20px; border: 1px solid var(--line); border-radius: 5px; }
 /* Source layout: one narrow column per institute, plus headquarters. */
 #institution-sections { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); align-items: start; gap: 10px; width: calc(100vw - 100px); margin-left: calc((100% - 100vw)/2 + 50px); }
 .institution-section { --institution: #00a046; padding: 15px 10px; border: 3px solid var(--institution); border-radius: 10px; min-width: 0; background: white; scroll-margin-top: 20px; }
@@ -110,10 +118,10 @@ html[lang=en] .page-heading h1 { font-size: 30px; }
 @media (max-width: 1150px) and (min-width: 959px) {
 }
 @media (max-width: 958px) {
-  .language-switch { font-size: 12px; }
   .breadcrumb { min-height: 75px; font-size: 12px; }
   .directory-shell { padding-bottom: 35px; }
   .page-heading { display: block; margin-bottom: 28px; }
+  .directory-search { margin-top: 0; }
   .page-heading h1, html[lang=en] .page-heading h1 { font-size: 28px; line-height: 1.5; }
   #institution-sections { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; margin-left: 0; }
   .institution-section { padding: 15px 12px 15px 91px; position: relative; }
@@ -163,7 +171,7 @@ html[lang=en] .page-heading h1 { font-size: 30px; }
   * { transition: none !important; animation: none !important; }
 }
 @media print {
-  .breadcrumb, .site-footer, dialog { display: none !important; }
+  .breadcrumb, .site-footer, dialog, .directory-search { display: none !important; }
   .directory-shell { width: 100%; padding: 0; }
   .page-heading { margin-bottom: 20px; }
   #institution-sections { width: 100%; margin: 0; grid-template-columns: repeat(3,minmax(0,1fr)); }

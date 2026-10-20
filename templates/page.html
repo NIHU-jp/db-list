@@ -13,9 +13,16 @@
 <body>
   <a class="skip-link" href="#main">$skip_label</a>
   <main id="main">
-    <nav class="breadcrumb" aria-label="$breadcrumb_label"><ol><li><a href="https://bridge.nihu.jp/">$top_label</a></li><li aria-current="page">$page_title</li></ol><a class="language-switch" href="$language_url" lang="$other_lang" hreflang="$other_lang" data-language-switch>$language_switch</a></nav>
+    <nav class="breadcrumb" aria-label="$breadcrumb_label"><ol><li><a href="https://bridge.nihu.jp/">$top_label</a></li><li aria-current="page">$page_title</li></ol></nav>
     <div class="directory-shell">
       <div class="page-heading"><h1 id="page-heading">$page_title</h1></div>
+      <div class="directory-search" role="search" aria-label="$finder_label" hidden>
+        <label for="directory-query">$search_label</label>
+        <div class="search-controls"><input id="directory-query" type="search" placeholder="$search_placeholder" aria-describedby="search-help" aria-controls="institution-sections" autocomplete="off"><button id="clear-search" type="button" disabled>$clear_label</button></div>
+        <p id="search-help">$search_help</p>
+        <p id="search-status" role="status" aria-live="polite" aria-atomic="true" data-count-template="$count_template"></p>
+      </div>
+      <p id="search-empty" hidden>$empty_title</p>
       <div id="institution-sections">$sections</div>
     </div>
   </main>

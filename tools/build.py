@@ -23,7 +23,8 @@ WORDS = {
   intro='歴史、文学、言語、文化、環境、民族。<br>人間文化研究機構の6機関と本部が提供するデータベースをご案内します。',
   stat_label='データベース', hero_note='6機関データベースリンク ＋ 本部', updated_label='一覧確認日',
   skip_label='本文へ移動', home_label='データベース一覧', language_label='言語とサイト案内', portal_label='機構ポータル',
-  language_switch='English', other_lang='en', finder_label='データベースを探す', search_label='名称・説明・機関名から検索',
+  other_lang='en', finder_label='データベースを探す', search_label='名称・説明・機関名から検索',
+  search_help='詳細画面の説明文も検索します。空白で区切ると、すべての語を含む項目を表示します。',
   search_placeholder='名称・キーワードから探す', clear_label='検索語を消す', filter_label='機関で絞り込む',
   results_label='データベース一覧', count_template='{visible} / {total} 件',
   empty_title='該当するデータベースがありません', empty_description='検索語や機関の選択を変えてお試しください。', reset_label='絞り込みを解除',
@@ -42,7 +43,8 @@ WORDS = {
   intro='History, literature, language, culture, environment and ethnology.<br>Explore databases from the six institutes and headquarters of NIHU.',
   stat_label='DATABASES', hero_note='Six institutes. One place to explore.', updated_label='List checked',
   skip_label='Skip to content', home_label='database directory', language_label='Language and site navigation', portal_label='NIHU portal',
-  language_switch='日本語', other_lang='ja', finder_label='Find a database', search_label='Search names, descriptions and institutes',
+  other_lang='ja', finder_label='Find a database', search_label='Search names, descriptions and institutes',
+  search_help='Includes descriptions in the detail dialogs. Separate words with spaces to match all of them.',
   search_placeholder='Search by name or keyword', clear_label='Clear search', filter_label='Filter by institution',
   results_label='Database directory', count_template='{visible} / {total} databases',
   empty_title='No databases found', empty_description='Try another keyword or select a different institution.', reset_label='Clear filters',
@@ -136,7 +138,7 @@ def render(root, lang, repository=''):
     total = sum(counts.values())
     values = dict(words, lang=lang, prefix=prefix, total=total,
                   repository_link=f'<a href="{esc(repository)}">GitHub ↗</a>' if repository else '',
-                  home='./index.html', language_url='./en/index.html' if lang == 'ja' else '../index.html',
+                  home='./index.html',
                   snapshot=snapshot, sections=''.join(sections), details='\n'.join(templates),
                   initial_count=words['count_template'].format(visible=total, total=total))
     return Template((ROOT / 'templates/page.html').read_text()).substitute(values)
