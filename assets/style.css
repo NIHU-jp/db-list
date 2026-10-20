@@ -30,11 +30,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .page-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 50px; }
 .page-heading h1 { margin: 0; font-size: 32px; line-height: 1.4; font-weight: 600; }
 .directory-search { margin: -22px 0 30px; max-width: 720px; }
-.directory-search label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
-.search-controls { display: flex; gap: 10px; }
-.search-controls input { min-width: 0; flex: 1; width: 100%; border: 1px solid #aaa; border-radius: 5px; padding: 10px 12px; background: white; }
-.search-controls button { flex-shrink: 0; padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; background: #f6f6f6; font-size: 13px; }
-.search-controls button:disabled { color: #888; cursor: default; }
+.directory-search input { min-width: 0; width: 100%; border: 1px solid #aaa; border-radius: 5px; padding: 10px 12px; background: white; }
 #search-help { margin: 8px 0; color: #666; font-size: 12px; }
 #search-status { margin: 8px 0 0; font-size: 13px; }
 #search-empty { padding: 20px; border: 1px solid var(--line); border-radius: 5px; }

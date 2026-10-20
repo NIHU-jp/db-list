@@ -17,8 +17,8 @@
     <div class="directory-shell">
       <div class="page-heading"><h1 id="page-heading">$page_title</h1></div>
       <div class="directory-search" role="search" aria-label="$finder_label" hidden>
-        <label for="directory-query">$search_label</label>
-        <div class="search-controls"><input id="directory-query" type="search" placeholder="$search_placeholder" aria-describedby="search-help" aria-controls="institution-sections" autocomplete="off"><button id="clear-search" type="button" disabled>$clear_label</button></div>
+        <label class="sr-only" for="directory-query">$search_label</label>
+        <input id="directory-query" type="search" placeholder="$search_label" aria-describedby="search-help" aria-controls="institution-sections" autocomplete="off">
         <p id="search-help">$search_help</p>
         <p id="search-status" role="status" aria-live="polite" aria-atomic="true" data-count-template="$count_template"></p>
       </div>

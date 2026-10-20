@@ -14,7 +14,6 @@
   desktop.addEventListener('change', adaptDetails);
   adaptDetails();
   const searchBox = document.querySelector('.directory-search');
-  const clearSearch = document.querySelector('#clear-search');
   const searchStatus = document.querySelector('#search-status');
   const searchEmpty = document.querySelector('#search-empty');
   const sections = [...document.querySelectorAll('[data-section]')];
@@ -54,17 +53,12 @@
       savedDisclosures = null;
       disclosures.forEach(details => { details.hidden = false; });
     }
-    clearSearch.disabled = !searchInput.value;
     searchEmpty.hidden = matches.size > 0;
     searchStatus.textContent = searchStatus.dataset.countTemplate.replace('{visible}', matches.size).replace('{total}', total);
   }
   searchInput.addEventListener('input', event => { if (!event.isComposing) filterEntries(); });
   searchInput.addEventListener('compositionend', filterEntries);
-  clearSearch.addEventListener('click', () => {
-    searchInput.value = '';
-    filterEntries();
-    searchInput.focus();
-  });
+  searchInput.addEventListener('search', filterEntries);
   searchBox.hidden = false;
   filterEntries();
   let lastTrigger = null;
