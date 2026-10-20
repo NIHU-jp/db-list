@@ -1,0 +1,67 @@
+# Nested repositories
+repos/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+pip-log.txt
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Local environment
+.envrc
+.env
+.vite/
+.history/
+_local/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Office documents
+*.ods
+*.~lock.*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated website and local ginit work areas
+/dist/
+/backupctl/
+/inbox/
+/tasks/
+/issues/
+/work/
+/worklog/
+/tmp/
+/CLAUDE.md
+
+# Research snapshots belong in the separate local work project
+/sources/
+/snapshots/
+/data/catalogue.xml

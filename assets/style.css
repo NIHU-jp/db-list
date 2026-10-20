@@ -1,0 +1,172 @@
+@charset "UTF-8";
+:root {
+  --ink: #333;
+  --muted: #777;
+  --brand: #00a046;
+  --line: #e6e6e6;
+  color-scheme: light;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-synthesis: none;
+  scroll-behavior: smooth;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #fff; color: var(--ink); font-size: 16px; line-height: 1.7; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid #008139; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; top: -90px; left: 20px; z-index: 20; background: white; padding: 12px 24px; }
+.skip-link:focus { top: 12px; }
+
+.breadcrumb { width: 90%; max-width: 1280px; margin: 0 auto; min-height: 100px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 14px; }
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 0; padding: 0; margin: 0; list-style: none; }
+.breadcrumb li + li::before { content: ">"; color: #333; margin: 0 1em; }
+.breadcrumb [aria-current] { color: var(--brand); }
+.breadcrumb a:hover { text-decoration: underline; }
+.language-switch { flex-shrink: 0; color: #555; font-size: 13px; }
+.directory-shell { width: 90%; max-width: 1280px; margin: 0 auto; padding-bottom: 50px; }
+.page-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 50px; }
+.page-heading h1 { margin: 0; font-size: 32px; line-height: 1.4; font-weight: 600; }
+/* Source layout: one narrow column per institute, plus headquarters. */
+#institution-sections { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); align-items: start; gap: 10px; width: calc(100vw - 100px); margin-left: calc((100% - 100vw)/2 + 50px); }
+.institution-section { --institution: #00a046; padding: 15px 10px; border: 3px solid var(--institution); border-radius: 10px; min-width: 0; background: white; scroll-margin-top: 20px; }
+.inst-rekihaku { --institution: #c5a348; }
+.inst-nijl { --institution: #cf5352; }
+.inst-ninjal { --institution: #00a4e8; }
+.inst-nichibun { --institution: #009566; }
+.inst-rihn { --institution: #01317d; }
+.inst-minpaku { --institution: #08329b; }
+.inst-nihu { --institution: #00a046; }
+.institution-heading { text-align: center; }
+.institution-logo { display: flex; justify-content: center; align-items: center; height: 83px; margin: 0 0 12px; }
+.institution-logo img { max-width: 100%; width: 80px; height: 80px; object-fit: contain; }
+.institution-titles h2 { font-size: 24px; line-height: 1.35; margin: 0 0 7px; font-weight: 600; }
+.institution-titles p { font-size: 14px; line-height: 18px; font-weight: 400; margin: 0 0 15px; min-height: 36px; }
+.institution-details > summary { display: none; list-style: none; border: 1px solid var(--line); color: #777; font-size: 14px; line-height: 28px; text-align: center; cursor: default; margin: 0 2px 4px; }
+.institution-details > summary::-webkit-details-marker { display: none; }
+.institution-details > summary strong { font-weight: 400; }
+.mobile-count-prefix, .mobile-count-end, .disclosure-arrow { display: none; }
+.database-list { padding: 0 3px; margin: 0; list-style: none; }
+.database-item { padding: 5px 0; border-bottom: 1px dotted var(--line); font-size: 14px; line-height: 21px; text-align: left; }
+.database-item a { display: block; font-weight: 600; overflow-wrap: anywhere; }
+.database-item a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.database-group { margin: 8px -3px; padding: 9px 6px; border: 1px solid var(--line); border-top: 3px solid var(--institution); border-radius: 3px; background: #fafafa; }
+.database-children { list-style: none; margin: 7px 0 0; padding: 0 0 0 9px; border-left: 2px solid #ddd; }
+.database-children .database-item { font-size: 12px; line-height: 1.6; }
+.database-children .database-item:last-child { border-bottom: 0; }
+.database-children a { font-weight: 400; }
+.list-summary { margin-top: 8px; font-size: 11px; line-height: 1.6; color: #555; }
+.list-summary p { margin: 0; }
+.list-summary table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+.list-summary th { width: 42%; font-weight: 400; font-size: 10.5px; padding-right: 0; }
+.list-summary th, .list-summary td { text-align: left; vertical-align: middle; padding-top: 4px; padding-bottom: 4px; border-bottom: 1px dotted var(--line); overflow-wrap: anywhere; }
+.list-summary data { display: block; text-align: right; white-space: nowrap; font-size: 10.5px; font-variant-numeric: tabular-nums; }
+.list-summary caption { caption-side: bottom; padding-top: 5px; text-align: right; font-size: 10px; color: #666; }
+.collection-list > summary { margin-top: 7px; color: #555; font-size: 12px; cursor: pointer; }
+.dialog-relations { margin: 20px 0; padding: 13px 16px; background: #f5f8f5; border-left: 3px solid #008b3d; font-size: 13px; }
+.dialog-relations h3 { margin: 0 0 7px; font-size: 12px; font-weight: 400; color: #666; }
+.dialog-relations ul { margin: 0; padding-left: 18px; }
+.dialog-relations a { text-decoration: underline; text-underline-offset: 3px; }
+.item-number, .item-arrow { display: none; }
+.site-footer { background: white; padding: 25px 30px; border-top: 1px solid var(--line); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.footer-information p { font-size: 11px; color: #777; margin: 0 0 8px; }
+.footer-information nav { display: flex; flex-wrap: wrap; gap: 20px; font-size: 12px; color: #666; }
+.footer-information a:hover { text-decoration: underline; }
+.footer-logo { flex: 0 0 150px; }
+.footer-logo img { width: 150px; height: auto; display: block; }
+/* Detail navigation is replaced with an accessible native dialog. */
+dialog { width: min(650px,calc(100% - 36px)); max-height: calc(100dvh - 64px); padding: 0; border: 1px solid #ddd; border-radius: 8px; color: #333; box-shadow: 0 25px 100px #0004; background: white; overscroll-behavior: contain; }
+dialog::backdrop { background: #0008; backdrop-filter: blur(2px); }
+.dialog-open { overflow: hidden; }
+.dialog-topline { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; background: #f6f6f6; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 1; }
+.dialog-topline > span { font-size: 10px; letter-spacing: 1.5px; color: #777; }
+.dialog-topline button { border: 0; background: transparent; font-size: 28px; line-height: 1; width: 32px; height: 32px; padding: 0; border-radius: 50%; }
+.dialog-topline button:hover { background: #e8e8e8; }
+#dialog-body { padding: 27px 32px 25px; }
+.dialog-institution { font-size: 12px; color: #666; display: flex; align-items: center; gap: 8px; }
+.institution-dot { width: 8px; height: 8px; background: var(--institution); display: inline-block; border-radius: 50%; flex-shrink: 0; }
+#dialog-title { font-size: 25px; line-height: 1.6; margin: 15px 0 8px; overflow-wrap: anywhere; }
+.dialog-alternate { color: #777; font-size: 13px; line-height: 1.8; margin: 0 0 23px; }
+.dialog-overview { margin: 25px 0 24px; border-top: 1px solid var(--line); padding-top: 21px; }
+.dialog-overview h3 { font-size: 13px; font-weight: 500; color: #666; margin: 0 0 12px; }
+.dialog-overview p { font-size: 14px; line-height: 2; margin: 0; overflow-wrap: anywhere; }
+.dialog-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: -5px 0 23px; }
+.dialog-tags > span { background: #f2f2f2; color: #666; border-radius: 4px; padding: 3px 9px; font-size: 11px; }
+.visit-button { display: flex; align-items: center; justify-content: space-between; background: #008b3d; border-radius: 5px; color: white; padding: 13px 19px; font-size: 14px; font-weight: 600; }
+.visit-button:hover { background: #006d30; }
+.visit-button > span { font-size: 20px; }
+.destination { text-align: center; font-size: 11px; color: #777; margin: 7px 0 23px; word-break: break-all; }
+.dialog-footer { border-top: 1px solid var(--line); padding-top: 17px; display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; font-size: 11px; color: #666; }
+.dialog-footer button { border: 0; background: transparent; text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; color: inherit; font-size: 11px; }
+.dialog-source:hover { text-decoration: underline; }
+.noscript-note { padding: 15px 24px; text-align: center; background: #f5f5f5; font-size: 13px; }
+html[lang=en] .institution-titles p { min-height: 90px; overflow-wrap: anywhere; }
+html[lang=en] .page-heading h1 { font-size: 30px; }
+
+@media (max-width: 1150px) and (min-width: 959px) {
+}
+@media (max-width: 958px) {
+  .language-switch { font-size: 12px; }
+  .breadcrumb { min-height: 75px; font-size: 12px; }
+  .directory-shell { padding-bottom: 35px; }
+  .page-heading { display: block; margin-bottom: 28px; }
+  .page-heading h1, html[lang=en] .page-heading h1 { font-size: 28px; line-height: 1.5; }
+  #institution-sections { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; margin-left: 0; }
+  .institution-section { padding: 15px 12px 15px 91px; position: relative; }
+  .institution-heading { text-align: left; }
+  .institution-logo { position: absolute; left: 15px; top: 18px; height: 60px; width: 60px; margin: 0; }
+  .institution-logo img { max-width: 60px; max-height: 60px; width: auto; height: auto; }
+  .institution-titles { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 17px; margin-bottom: 10px; }
+  .institution-titles h2 { margin: 0; font-size: 24px; }
+  .institution-titles p, html[lang=en] .institution-titles p { margin: 0; min-height: 0; font-size: 14px; line-height: 1.5; }
+  .institution-details { border: 1px solid var(--line); padding: 0 10px; }
+  .institution-details > summary { display: flex; align-items: center; justify-content: flex-start; margin: 0; border: 0; cursor: pointer; text-align: left; min-height: 37px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
+  .desktop-count-prefix { display: none; }
+  .mobile-count-prefix, .mobile-count-end { display: inline; }
+  .disclosure-arrow { display: block; width: 9px; height: 9px; border-right: 2px solid #777; border-bottom: 2px solid #777; transform: rotate(45deg); margin: -4px 3px 0 auto; flex-shrink: 0; }
+  .institution-details[open] .disclosure-arrow { transform: rotate(225deg); margin-top: 4px; }
+  .database-list { padding: 0; }
+  .database-item { padding: 7px 0; font-size: 14px; line-height: 1.7; }
+  .site-footer { padding: 25px 20px; }
+  .footer-inner { align-items: flex-start; gap: 20px; }
+  .footer-information p { font-size: 10px; }
+  .footer-information nav { font-size: 11px; gap: 13px; }
+  .footer-logo { flex-basis: 125px; }
+  .footer-logo img { width: 125px; }
+}
+@media (max-width: 480px) {
+  .breadcrumb { font-size: 11px; min-height: 65px; }
+  .breadcrumb li + li::before { margin: 0 .6em; }
+  .page-heading h1, html[lang=en] .page-heading h1 { font-size: 24px; }
+  .institution-section { padding-left: 80px; padding-right: 10px; }
+  .institution-logo { left: 10px; width: 56px; height: 56px; }
+  .institution-logo img { max-width: 56px; max-height: 56px; }
+  .institution-titles { gap: 4px 11px; }
+  .institution-titles h2 { font-size: 22px; }
+  .institution-titles p, html[lang=en] .institution-titles p { font-size: 12px; }
+  .institution-details { padding: 0 8px; }
+  .institution-details > summary { font-size: 12px; }
+  .database-item { font-size: 13px; }
+  .footer-inner { flex-direction: column; }
+  .footer-logo { flex-basis: auto; align-self: flex-end; }
+  dialog { width: calc(100% - 24px); max-height: calc(100dvh - 32px); }
+  #dialog-body { padding: 22px 23px; }
+  #dialog-title { font-size: 21px; }
+  .dialog-overview p { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+@media print {
+  .breadcrumb, .site-footer, dialog { display: none !important; }
+  .directory-shell { width: 100%; padding: 0; }
+  .page-heading { margin-bottom: 20px; }
+  #institution-sections { width: 100%; margin: 0; grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .institution-section { break-inside: avoid; }
+  .database-item { font-size: 10px; padding: 3px 0; }
+}

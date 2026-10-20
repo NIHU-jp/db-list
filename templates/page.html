@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="$lang">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="$meta_description">
+  <meta name="theme-color" content="#00a046">
+  <title>$page_title | nihuBridge</title>
+  <link rel="icon" href="$prefix/assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="$prefix/assets/style.css">
+  <script src="$prefix/assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">$skip_label</a>
+  <main id="main">
+    <nav class="breadcrumb" aria-label="$breadcrumb_label"><ol><li><a href="https://bridge.nihu.jp/">$top_label</a></li><li aria-current="page">$page_title</li></ol><a class="language-switch" href="$language_url" lang="$other_lang" hreflang="$other_lang" data-language-switch>$language_switch</a></nav>
+    <div class="directory-shell">
+      <div class="page-heading"><h1 id="page-heading">$page_title</h1></div>
+      <div id="institution-sections">$sections</div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-information"><p>$footer_note</p><nav aria-label="$data_label"><a href="$prefix/data/jpcoar.xml">$xml_label ↓</a>$repository_link</nav></div><a class="footer-logo" href="https://www.nihu.jp/$nihu_lang"><img src="$prefix/assets/logo_nihu_$nihu_logo.png" alt="$nihu_name" width="150" height="60" loading="lazy"></a></div></footer>
+  <dialog id="resource-dialog" aria-labelledby="dialog-title"><div class="dialog-topline"><span>$detail_label</span><button type="button" id="close-dialog" aria-label="$close_label">×</button></div><div id="dialog-body"></div></dialog>
+  $details
+  <noscript><p class="noscript-note">$noscript_note</p></noscript>
+</body>
+</html>
