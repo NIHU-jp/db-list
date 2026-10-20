@@ -1,6 +1,3 @@
-# Nested repositories
-repos/
-
 # Python
 __pycache__/
 *.py[cod]
@@ -32,7 +29,6 @@ ENV/
 .envrc
 .env
 .vite/
-.history/
 _local/
 
 # Logs and temporary files
@@ -50,16 +46,9 @@ _local/
 .coverage
 htmlcov/
 
-# Generated website and local ginit work areas
+# Generated website and temporary files
 /dist/
-/backupctl/
-/inbox/
-/tasks/
-/issues/
-/work/
-/worklog/
 /tmp/
-/CLAUDE.md
 
 # Research snapshots belong in the separate local work project
 /sources/
