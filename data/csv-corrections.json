@@ -1,0 +1,77 @@
+{
+  "source": "Reviewed pre-migration databases.xml and its CSV projection",
+  "source_commit": "863c9c9a3415da46b5b8e20bd744cc0a985dc5e6",
+  "added_column": "Catalogue ID (stable existing XML record ID)",
+  "changes": [
+    {
+      "id": "bridge-nijl_azumakagami",
+      "field": "Access Rights",
+      "before": "",
+      "after": "open access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_21daisyuu",
+      "field": "Access Rights",
+      "before": "",
+      "after": "open access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_ousyusyozai",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_kohitugire",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_rekisijinbutu",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_meijisyuppankoukoku",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_kotengeinoukiroku",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_kotengakutougouhyakka_hagajinmeijiten",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "bridge-nijl_kojiruien",
+      "field": "Access Rights",
+      "before": "",
+      "after": "metadata only access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    },
+    {
+      "id": "official-nijl-naraehon-text-dataset",
+      "field": "Access Rights",
+      "before": "",
+      "after": "open access",
+      "reason": "Recover reviewed XML information omitted by earlier CSV exporter"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from catalogue import NS, ROOT, LANG, read, records, record_view, text
 
-CSV_HEADERS = ['ID', 'English Title', 'Japanese Title', 'Original Title', 'Created Date',
+CSV_HEADERS = ['Catalogue ID', 'ID', 'English Title', 'Japanese Title', 'Original Title', 'Created Date',
                'Access Rights', 'English Name of Creator', 'Alternative Name of Creator',
                'Institution Information', 'Description (in English)', 'Description (in Japanese)',
                'Resource URL', 'Parent Resource', 'Format of contents (in MIME Type)',
@@ -23,6 +23,7 @@ def listed_rows(root):
     for rec in records(root, listed=True):
         ja, en = record_view(rec, 'ja'), record_view(rec, 'en')
         row = {name: ja['admin'].get('csv_fields', {}).get(name, '') for name in headers}
+        row['Catalogue ID'] = rec.get('id')
         row.update({'Japanese Title': ja['title'], 'English Title': en['title'],
                     'Description (in Japanese)': ja['description'],
                     'Description (in English)': en['description'], 'Resource URL': ja['url']})
@@ -51,7 +52,7 @@ def export(root, destination):
 def main():
     args = argparse.ArgumentParser(description=__doc__)
     args.add_argument('--input', type=Path, default=ROOT / 'data/databases.xml')
-    args.add_argument('--output', type=Path, default=ROOT / 'data/databases.csv')
+    args.add_argument('--output', type=Path, default=ROOT / 'data/databases-export.csv')
     opts = args.parse_args()
     count = export(read(opts.input).getroot(), opts.output)
     print(f'Exported {count} rows to {opts.output}')

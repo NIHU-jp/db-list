@@ -1,6 +1,6 @@
 # NIHU各機関 データベース・データセット 一覧
 
-JPCOAR 2.0を含む掲載用XMLから、日本語・英語の静的一覧を生成するサイトです。大規模DBと下位データセットをまとめ、詳細はモーダルで表示します。
+基本CSVと補足JSONからJPCOAR 2.0を含む拡張XMLを生成し、日本語・英語の静的一覧を生成するサイトです。大規模DBと下位データセットをまとめ、詳細はモーダルで表示します。
 
 名称・別言語の名称・一覧文・詳細画面の説明・キーワード・機関名で検索できます。空白区切りの複数語はすべてを含む項目に一致し、英字の大小・全角半角は区別しません。検索結果には該当項目の親も表示しますが、件数は一致した項目のみを数えます。日英ページの切り替えは埋め込み先のバナーで行います。
 
@@ -10,18 +10,18 @@ JPCOAR 2.0を含む掲載用XMLから、日本語・英語の静的一覧を生�
 
 | ファイル | 用途 |
 |---|---|
-| [databases.xml](data/databases.xml) | 掲載分の正本。JPCOAR、機関区分、掲載順、一覧用HTML、現在のCSV用追加項目を保持。サイトを再生成できます |
-| [databases.csv](data/databases.csv) | 上記XMLから生成した掲載用26列CSV。新規項目のDrupal IDは空欄です |
+| [databases.xml](data/databases.xml) | CSV＋補足JSONから生成する統合XML。JPCOAR、機関区分、掲載順、一覧用HTML、全CSV列を保持。直接編集しません |
+| [databases.csv](data/databases.csv) | 共同編集用の基本正本。既存26列＋固定Catalogue ID列。元のDrupal IDとは区別します |
 
 標準JPCOAR部分のみのXMLは公開サイトのフッターからダウンロードできます。サイト側の配布ファイルは `data/jpcoar.xml` で、CSVと拡張付きXMLの入手先はこのREADMEです。
 
-CSVは生成物です。編集はXMLに行い、ビルドでCSVも更新してください。CSVは一般的な作業用データであり、取り込み先のシステムへの無検証の一括更新を前提としていません。
+CSVが基本項目の編集正本です。[supplement.json](data/supplement.json)に親子関係・追加URL・一覧用HTML・機関設定等を保持します。共通形式の定義は[catalogue_source/README.md](catalogue_source/README.md)を参照してください。固定Catalogue IDで結合し、CSVが担当する値をJSONで上書きしません。
 
 ## ローカルで生成
 
 Python 3.12以上と `requirements.txt` のlxml 6系を使います。追加のWebアプリケーション、DB、収集処理は不要です。
 
-リポジトリのルートで `sh build.sh` を実行すると、CSVを更新し、`dist/` に日英のHTML・画像・JavaScript・標準JPCOAR XMLを生成します。`sh check.sh` で検証します。
+リポジトリのルートで `sh build.sh` を実行すると、CSVとJSONから拡張XMLを更新し、`dist/` に日英のHTML・画像・JavaScript・標準JPCOAR XMLを生成します。`sh check.sh` で検証します。
 
 `sh preview.sh` でローカルの <http://127.0.0.1:8893/> を開けます。`NIHU_PREVIEW_PORT` でポートを変更できます。
 
@@ -35,7 +35,7 @@ GitHubリンクはGitHub Actionsの `GITHUB_REPOSITORY`、またはローカルG
 
 Pull Requestでは検証とビルドを行い、公開はしません。公開対象は `dist/` のみです。リポジトリ名付きのサブパスでも動く相対リンクを使っています。
 
-XMLを変更したら、コミット前にローカルで `sh build.sh` を実行してCSVを更新してください。検証はXMLとCSVの一致を確認するため、XMLだけを変更した状態では通りません。
+CSVまたは補足JSONを編集したら、コミット前に `sh build.sh` でXMLを再生成してください。CSVはビルドで書き換えません。XMLのみの生成は `sh prepare.sh` です。検証は両入力からXMLを再現でき、全CSV列を保持することを確認します。tools/export_csv.pyは検証・出力用であり、編集正本への逆書き込みはしません。
 
 ## メタデータと表示
 

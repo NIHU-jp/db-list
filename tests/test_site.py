@@ -34,7 +34,7 @@ class SiteTests(unittest.TestCase):
         official = ET.XMLSchema(ET.parse(str(ROOT / 'schema/jpcoar_scm.xsd'), parser()))
         for rec in listed:
             official.assertValid(rec.find(q('jpcoar:jpcoar')))
-            self.assertFalse(rec.findall(q('nihu:csvRow')))
+            self.assertEqual(len(rec.findall(q('nihu:csvRow'))), 1)
             admin = json.loads(rec.find(q('nihu:administration')).text)
             self.assertEqual(set(admin), {'website', 'csv_fields'})
             self.assertTrue(set(admin['website']) <= {'source_url','details'})
@@ -42,7 +42,8 @@ class SiteTests(unittest.TestCase):
             self.assertEqual(list(csv.DictReader(handle)), listed_rows(self.root))
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'export.csv'; export(self.root,path)
-            self.assertEqual(path.read_bytes(),(ROOT/'data/databases.csv').read_bytes())
+            with path.open(encoding='utf-8-sig', newline='') as handle:
+                self.assertEqual(list(csv.DictReader(handle)), listed_rows(self.root))
 
     def test_build_is_reproducible_and_publishes_only_standard_xml(self):
         with tempfile.TemporaryDirectory() as temp:
